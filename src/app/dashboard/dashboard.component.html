@@ -30,7 +30,7 @@
         <ng-template pTemplate="body" let-hero>
             <tr>
                 <td>{{hero.id}}</td>
-                <td>{{hero.name | uppercase}}</td>
+                <td [innerHTML]="hero.name | uppercase | highlight: filter"></td>
                 <td>{{hero.power}}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="['/hero', hero.id ]"></button>

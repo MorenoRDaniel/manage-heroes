@@ -19,12 +19,14 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,
