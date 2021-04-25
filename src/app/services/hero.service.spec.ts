@@ -32,17 +32,16 @@ describe('HeroService', () => {
   describe('#CRUD', () => {
 
     it('should update the hero', () => {
-      const updateHero: Hero = { id: 1, name: 'A', power: 'B' };
-      service.update(updateHero).subscribe(
-        data => expect(data).toEqual(updateHero, 'should return the hero'),
+      service.update(hero).subscribe(
+        data => expect(data).toEqual(hero, 'should return the hero'),
         fail
       );
 
       const req = httpTestingController.expectOne(service.mocksUrl);
       expect(req.request.method).toEqual('PUT');
-      expect(req.request.body).toEqual(updateHero);
+      expect(req.request.body).toEqual(hero);
       const expectedResponse = new HttpResponse(
-        { status: 200, statusText: 'OK', body: updateHero });
+        { status: 200, statusText: 'OK', body: hero });
       req.event(expectedResponse);
     });
 
@@ -72,7 +71,7 @@ describe('HeroService', () => {
       req.flush(expectedHeroes);
     });
 
-    it('should search expected heroes', () => {
+    it('should search heroes by name', () => {
       const updateHero: Hero = { id: 1, name: 'A', power: 'B' };
       service.search(updateHero.name).subscribe(heroes =>
         expect(heroes).toEqual(expectedHeroes),

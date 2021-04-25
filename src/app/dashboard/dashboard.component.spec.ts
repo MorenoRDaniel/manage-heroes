@@ -41,8 +41,7 @@ describe('DashboardComponent', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('should call getHeroes method', () => {
-
+  it('should call getHeroes method by not filter', () => {
     const spy = spyOn(service, 'getHeroes').and.callFake(() => {
       return of();
     });
@@ -50,7 +49,7 @@ describe('DashboardComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should call delete method', () => {
+  it('should show popup and not continue', () => {
     const spy = spyOn(service, 'delete').and.callFake(() => {
       return of();
     });

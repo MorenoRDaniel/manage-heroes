@@ -51,7 +51,7 @@ describe('HeroDetailComponent', () => {
   });
 
 
-  it('should call the validate method', () => {
+  it('should validate the form and not continue with method', () => {
     const spy = spyOn(service, 'delete').and.callFake(() => {
       return of();
     });
