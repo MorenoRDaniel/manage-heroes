@@ -1,0 +1,49 @@
+
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" routerLink="/hero/new"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="heroes" [rows]="4" [paginator]="true" [globalFilterFields]="['id','name','power']"
+        [(selection)]="selectedHeroes" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Heroes</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+         <!-- <input pInputText type="text" [(ngModel)]="filter" (input)="dt.filterGlobal(filter, 'contains')" placeholder="Search..." /> -->
+              <input pInputText type="text" [(ngModel)]="filter" (input)="search()" placeholder="Search...">
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="power">Power <p-sortIcon field="power"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-hero>
+            <tr>
+                <td>{{hero.id}}</td>
+                <td>{{hero.name | uppercase}}</td>
+                <td>{{hero.power}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" [routerLink]="['/hero', hero.id ]"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteHero(hero)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{heroes ? heroes.length : 0 }} heroes.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

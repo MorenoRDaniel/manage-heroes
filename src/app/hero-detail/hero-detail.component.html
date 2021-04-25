@@ -1,0 +1,37 @@
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="Go back" icon="pi pi-arrow-left" class="p-button-danger"
+            routerLink="/dashboard"></button>
+    </ng-template>
+</p-toolbar>
+
+<h1>Hero</h1>
+<h2 *ngIf="hero && hero.name else noFound">{{hero.name | uppercase}} Details</h2>
+
+
+<div *ngIf="hero" class="p-mt-4 card">
+    <form (ngSubmit)="save(form)" #form="ngForm">
+        <div class="p-fluid ">
+            <div class="p-field">
+                <label>ID</label>
+                <input name="hero-id" type="number" [(ngModel)]="hero.id" class="form-control" pInputText
+                    disabled="disabled">
+                <small class="form-text text-muted">Self-generated</small>
+
+            </div>
+
+            <div class="p-field">
+                <label>Name</label>
+                <input required name="hero-name" [(ngModel)]="hero.name" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label>Power</label>
+                <input name="hero-power" [(ngModel)]="hero.power" type="text" pInputText>
+            </div>
+        </div>
+
+        <button pButton pRipple label="Save" icon="pi pi-save" class="p-button-success p-d-block p-mx-auto"></button>
+    </form>
+</div>
+
+<ng-template #noFound>No found.</ng-template>
