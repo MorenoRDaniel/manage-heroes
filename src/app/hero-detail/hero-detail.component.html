@@ -5,33 +5,38 @@
     </ng-template>
 </p-toolbar>
 
-<h1>Hero</h1>
-<h2 *ngIf="hero && hero.name else noFound">{{hero.name | uppercase}} Details</h2>
-
-
-<div *ngIf="hero" class="p-mt-4 card">
-    <form (ngSubmit)="save(form)" #form="ngForm">
+<div *ngIf="hero else notFound" class="p-mt-4 card">
+    <h1>Hero</h1>
+    <h2 *ngIf="hero && hero.name">{{hero.name | uppercase}} Details</h2>
+    <form (ngSubmit)="validate(heroForm)" #heroForm="ngForm">
         <div class="p-fluid ">
             <div class="p-field">
-                <label>ID</label>
-                <input name="hero-id" type="number" [(ngModel)]="hero.id" class="form-control" pInputText
-                    disabled="disabled">
-                <small class="form-text text-muted">Self-generated</small>
-
+                <label for="heroId">ID</label>
+                <input id="heroId" name="id" type="number" [(ngModel)]="hero.id" pInputText disabled
+                    placeholder="Self-generated">
             </div>
-
-            <div class="p-field">
-                <label>Name</label>
-                <input required name="hero-name" [(ngModel)]="hero.name" type="text" pInputText>
+            <div class="p-field form-group">
+                <label for="heroName">Name</label>
+                <input id="heroName" required name="name" [(ngModel)]="hero.name" class="form-control" type="text"
+                    pInputText #name="ngModel">
+                <div [hidden]="name.valid || name.pristine" class="p-error">
+                    Name is required
+                </div>
             </div>
-            <div class="p-field">
-                <label>Power</label>
-                <input name="hero-power" [(ngModel)]="hero.power" type="text" pInputText>
+            <div class="p-field form-group">
+                <label for="heroPower">Power</label>
+                <input id="heroPower" required name="power" [(ngModel)]="hero.power" class="form-control" type="text"
+                    pInputText #power="ngModel">
+                <div [hidden]="power.valid || power.pristine" class="p-error">
+                    Power is required
+                </div>
             </div>
         </div>
 
-        <button pButton pRipple label="Save" icon="pi pi-save" class="p-button-success p-d-block p-mx-auto"></button>
+        <button [disabled]="!heroForm.form.valid" pButton pRipple label="Save" icon="pi pi-save" class="p-button-success p-d-block p-mx-auto"></button>
     </form>
 </div>
 
-<ng-template #noFound>No found.</ng-template>
+<ng-template #notFound>
+    <h1>Hero no found.</h1>
+</ng-template>

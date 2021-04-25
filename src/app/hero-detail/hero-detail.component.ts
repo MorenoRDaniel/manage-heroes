@@ -22,18 +22,24 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero(): void {
-    const id =  Number(this.route.snapshot.paramMap.get('id'));
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     if (!isNaN(id)) {
       this.heroService.getHero(Number(id))
         .subscribe(hero => this.hero = hero);
     }
   }
 
-  save(form: NgForm): void {
-    if (form.invalid) {
+  validate(form: NgForm): void {
+    this.hero.name = this.hero.name.trim();
+    this.hero.power = this.hero.power.trim();
+    if (form.invalid || !this.hero.name || !this.hero.power) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid form', life: 3000 });
       return;
     }
+    this.save();
+  }
+
+  save(): void {
     if (this.hero.id) {
       this.heroService.update(this.hero).subscribe(
         () => {
@@ -48,7 +54,6 @@ export class HeroDetailComponent implements OnInit {
         });
     }
   }
-
 
   goDashboard(): void {
     this.router.navigate(['/dashboard']);
