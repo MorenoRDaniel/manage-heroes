@@ -43,13 +43,13 @@ export class HeroDetailComponent implements OnInit {
     if (this.hero.id) {
       this.heroService.update(this.hero).subscribe(
         () => {
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Hero Updated', life: 3000 });
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: `${this.hero.name} Hero Updated`, life: 3000 });
           this.goDashboard();
         });
     } else {
       this.heroService.add(this.hero).subscribe(
         () => {
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Hero Created', life: 3000 });
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: `${this.hero.name} Hero Created`, life: 3000 });
           this.goDashboard();
         });
     }

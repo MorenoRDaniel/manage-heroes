@@ -44,15 +44,13 @@ export class DashboardComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.heroes = this.heroes.filter(h => h !== hero);
-        this.heroService.delete(hero.id).subscribe();
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Hero Deleted', life: 3000 });
+        this.heroService.delete(hero.id).subscribe(() => {
+          this.heroes = this.heroes.filter(h => h !== hero);
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: `${hero.name} Hero Deleted`, life: 3000 });
+        });
       }
     });
   }
-
-  deleteSelectedHeroes(): void { }
-
 
   search(): void {
     (this.filter) ?

@@ -10,7 +10,7 @@ import { Hero } from '../model/hero';
 })
 export class HeroService {
 
-  private mocksUrl = 'api/heroes';
+  readonly mocksUrl = 'api/heroes';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
