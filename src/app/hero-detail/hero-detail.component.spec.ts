@@ -16,7 +16,8 @@ describe('HeroDetailComponent', () => {
   const newHero = { id: 1, name: 'A', power: 'B' };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, CommonModule, FormsModule, RouterTestingModule],
+      imports: [HttpClientModule, CommonModule, FormsModule,  RouterTestingModule.withRoutes(
+        [{path: '', component: DashboardComponent}, {path: 'dashboard', component: DashboardComponent}])],
       providers: [MessageService, Location],
       declarations: [HeroDetailComponent, DashboardComponent]
     })
